@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Reporte de Pago — Nequi</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #0b192c 0%, #1e293b 100%);
+            min-height: 100vh;
+            padding: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            overflow: hidden;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #061d47 0%, #0d2a5f 100%);
+            color: white;
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        .header h1 {
+            font-size: 24px;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .header-logo {
+            max-width: 200px;
+            max-height: 80px;
+            margin: 0 auto 12px auto;
+            display: block;
+            object-fit: contain;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+
+        .header p {
+            font-size: 14px;
+            opacity: 0.95;
+        }
+
+        .progress-bar {
+            display: flex;
+            background: #f5f5f5;
+            padding: 20px;
+            gap: 10px;
+        }
+
+        .progress-step {
+            flex: 1;
+            height: 6px;
+            background: #ddd;
+            border-radius: 3px;
+            transition: background 0.3s ease;
+        }
+
+        .progress-step.active {
+            background: linear-gradient(90deg, #1d4ed8 0%, #3b82f6 100%);
+        }
+
+        .progress-step.completed {
+            background: #10b981;
+        }
+
+        .content {
+            padding: 30px 20px;
+        }
+
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .step-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 8px;
+        }
+
+        .step-description {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            color: #374151;
+            margin-bottom: 6px;
+        }
+
+        .form-group label.required::after {
+            content: ' *';
+            color: #ef4444;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 14px;
+            border: 2px solid #e5e7eb;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.2s ease;
+            font-family: inherit;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #2563eb;
+        }
+
+        .form-group input.error,
+        .form-group select.error {
+            border-color: #ef4444;
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+
+        .error-message {
+            color: #ef4444;
+            font-size: 13px;
+            margin-top: 4px;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .btn {
+            width: 100%;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-family: inherit;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
+            color: white;
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(37, 99, 235, 0.4);
+        }
+
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .payment-info {
+            background: linear-gradient(135deg, #1d4ed810 0%, #3b82f610 100%);
+            border: 2px solid #3b82f640;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
+            text-align: center;
+        }
+
+        .payment-info h3 {
+            font-size: 16px;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+
+
+        .nequi-number {
+            font-size: 28px;
+            font-weight: 700;
+            color: #1d4ed8;
+            letter-spacing: 2px;
+            margin: 12px 0;
+            user-select: all;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            margin: 20px auto;
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .qr-code img {
+            width: 100%;
+            height: 100%;
+            display: block;
+        }
+
+        .file-upload-zone {
+            border: 3px dashed #d1d5db;
+            border-radius: 12px;
+            padding: 30px 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-bottom: 20px;
+        }
+
+                .file-upload-zone.drag-over {
+            border-color: #3b82f6;
+            background: #3b82f615;
+        }
+        .file-upload-zone:hover {
+            border-color: #3b82f6;
+            background: #3b82f608;
+        }
+
+        .file-upload-zone.has-file {
+            border-color: #10b981;
+            background: #10b98110;
+        }
+
+        .file-upload-zone input[type="file"] {
+            display: none;
+        }
+
+        .upload-icon {
+            font-size: 48px;
+            color: #9ca3af;
+            margin-bottom: 12px;
+        }
+
+        .file-upload-zone.has-file .upload-icon {
+            color: #10b981;
+        }
+
+        .upload-text {
+            font-size: 15px;
+            color: #6b7280;
+            margin-bottom: 6px;
+        }
+
+        .file-upload-zone.has-file .upload-text {
+            color: #10b981;
+            font-weight: 600;
+        }
+
+        .upload-subtext {
+            font-size: 13px;
+            color: #9ca3af;
+        }
+
+        .file-name {
+            font-size: 14px;
+            color: #374151;
+            margin-top: 8px;
+            word-break: break-all;
+        }
+
+        .loader {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loader.show {
+            display: block;
+        }
+
+        .spinner {
+            border: 4px solid #f3f4f6;
+            border-top: 4px solid #2563eb;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 16px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loader-text {
+            color: #6b7280;
+            font-size: 14px;
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 20px;
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            color: white;
+        }
+
+        .success-message {
+            text-align: center;
+        }
+
+        .success-message h2 {
+            font-size: 24px;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .success-message p {
+            font-size: 15px;
+            color: #6b7280;
+            line-height: 1.6;
+            margin-bottom: 12px;
+        }
+
+        .alert {
+            background: #fef3c7;
+            border-left: 4px solid #f59e0b;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+        }
+
+        .alert-icon {
+            display: inline-block;
+            margin-right: 8px;
+            font-size: 18px;
+        }
+
+        .alert-text {
+            font-size: 14px;
+            color: #92400e;
+            line-height: 1.5;
+        }
+
+        .info-box {
+            background: #eff6ff;
+            border-left: 4px solid #3b82f6;
+            padding: 16px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 14px;
+            color: #1e40af;
+            line-height: 1.6;
+        }
+
+        @media (max-width: 480px) {
+            .header h1 {
+                font-size: 20px;
+            }
+
+            .nequi-number {
+                font-size: 24px;
+            }
+
+            .content {
+                padding: 24px 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img src="LOGO JARDINES.png" alt="Jardines del Renacer" class="header-logo">
+            <h1>Portal de Reporte de Pago</h1>
+            <p>Sistema de conciliación Nequi</p>
+        </div>
+
+        <div class="progress-bar">
+            <div class="progress-step" id="progress-1"></div>
+            <div class="progress-step" id="progress-2"></div>
+            <div class="progress-step" id="progress-3"></div>
+        </div>
+
+        <div class="content">
+            <!-- PASO 1: DATOS DEL CLIENTE -->
+            <div class="step active" id="step-1">
+                <h2 class="step-title">Paso 1: Datos del Reporte</h2>
+                <p class="step-description">Completa los datos del cliente y el método de pago</p>
+
+                <div class="info-box">
+                    ℹ️ <strong>Importante:</strong> Verifica que el comprobante que vas a subir corresponda a la cuenta seleccionada.
+                </div>
+
+                <form id="form-step1">
+                    <div class="form-group">
+                        <label for="nombre" class="required">Nombre completo del cliente</label>
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez García">
+                        <div class="error-message" id="error-nombre">Este campo es obligatorio</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="cedula" class="required">Número de cédula del cliente</label>
+                        <input type="text" id="cedula" name="cedula" required placeholder="Solo números" pattern="[0-9]+">
+                        <div class="error-message" id="error-cedula">Ingresa solo números</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="servicio" class="required">Servicio o producto a pagar</label>
+                        <select id="servicio" name="servicio" required>
+                            <option value="Plan funerario" selected>Plan funerario</option>
+                        </select>
+                        <div class="error-message" id="error-servicio">Selecciona un servicio</div>
+                    </div>
+
+                    
+                    <div class="form-group">
+                        <label for="contrato" class="required">Número de Contrato</label>
+                        <input type="text" id="contrato" name="contrato" required placeholder="Ej: 12345">
+                        <div class="error-message" id="error-contrato">Este campo es obligatorio</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pisco" class="required">Usuario de pisco</label>
+                        <input type="text" id="pisco" name="pisco" required placeholder="Usuario del sistema">
+                        <div class="error-message" id="error-pisco">Este campo es obligatorio</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="dondePago" class="required">Dónde pagó</label>
+                        <select id="dondePago" name="dondePago" required>
+                            <option value="">Selecciona una opción</option>
+                            <option value="Nequi">Nequi (3235216832 Doña Adriana)</option>
+                            <option value="Bancolombia">Bancolombia (72133789471)</option>
+                            <option value="Bancolombia Corresponsal">Bancolombia Corresponsal (Convenio 56566)</option>
+                            <option value="Davivienda">Davivienda (127669999972)</option>
+                            <option value="Llave Davivienda">Llave Davivienda (@9003407247)</option>
+                            <option value="Efecty">Efecty (Convenio 111489)</option>
+                        </select>
+                        <div class="error-message" id="error-dondePago">Selecciona dónde pagó el cliente</div>
+                    </div>
+
+
+                    <button type="submit" class="btn btn-primary">Continuar a adjuntar comprobante →</button>
+                </form>
+            </div>
+
+            <!-- PASO 2: PAGO Y COMPROBANTE -->
+            <div class="step" id="step-2">
+                <h2 class="step-title">Paso 2: Subir comprobante</h2>
+                <p class="step-description">Adjunta la captura de pantalla del comprobante enviado por el cliente</p>
+
+                
+                <div class="payment-info" style="margin-bottom: 20px;">
+                    <h3 id="payment-title">Verifica el comprobante</h3>
+                    <p style="font-size: 14px; color: #4b5563; margin-bottom: 8px;">El cliente debe haber pagado a la siguiente cuenta/convenio:</p>
+                    <div class="nequi-number" id="payment-account" style="font-size: 24px; letter-spacing: 2px;">---</div>
+                </div>
+                <div class="alert">
+                    <span class="alert-icon">⚠️</span>
+                    <span class="alert-text">
+                        <strong>¡IMPORTANTE!</strong> Asegúrate de adjuntar el comprobante correcto. El sistema leerá automáticamente el monto y la fecha. El sistema leerá automáticamente el monto transferido.
+                    </span>
+                </div>
+
+                <div class="example-container" style="text-align: center; margin-bottom: 20px; background: white; border-radius: 12px; padding: 15px; border: 1px solid #e5e7eb;">
+                    <p style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 10px;">📸 Así debe verse tu captura:</p>
+                    <img src="ejemplo.png" alt="Ejemplo de comprobante válido" style="max-height: 250px; width: auto; border-radius: 8px; border: 2px solid #10b981;" onerror="this.style.display='none';">
+                    <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">Debe incluir el número Nequi destino <strong>323 251 6832</strong> y ser legible.</p>
+                </div>
+
+                <div class="file-upload-zone" id="upload-zone">
+                    <input type="file" id="file-input" accept="image/*,.pdf" required>
+                    <div class="upload-icon">📸</div>
+                    <div class="upload-text">Arrastra o toca aquí para adjuntar comprobante</div>
+                    <div class="upload-subtext">Formatos: JPG, PNG o PDF (máx. 5MB)</div>
+                    <div class="file-name" id="file-name"></div>
+                </div>
+
+                <button type="button" class="btn btn-primary" id="btn-submit" disabled>
+                    Enviar comprobante ✓
+                </button>
+
+                <div class="loader" id="loader">
+                    <div class="spinner"></div>
+                    <div class="loader-text">Enviando y analizando tu comprobante de pago...<br>Por favor espera unos segundos, no cierres esta ventana.</div>
+                </div>
+            </div>
+
+            <!-- PASO 3: CONFIRMACIÓN -->
+            <div class="step" id="step-3">
+                <div class="success-message">
+                    <div class="success-icon">✓</div>
+                    <h2>¡Pago reportado con éxito!</h2>
+                    <p>Hemos recibido y registrado tu comprobante de pago correctamente.</p>
+                    <p><strong>Nuestro equipo de Cartera verificará tu pago en las próximas 24-48 horas.</strong></p>
+                    <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 14px;">
+                        Si tienes alguna duda sobre tu pago, contacta a nuestro equipo de atención al cliente.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ===== CONFIGURACIÓN =====
+        // 🔧 IMPORTANTE: Reemplaza esta URL con la URL de tu Web App de Google Apps Script
+        const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOLsZZ6s9tHfU7Zlw2hj1X1NncfItXvYVB4eNaox_ypPthsllQpE5rKD4tDtUG6kuUiw/exec';
+        
+        // ===== ESTADO DE LA APLICACIÓN =====
+        let currentStep = 1;
+        let formData = {};
+        let uploadedFile = null;
+
+        // ===== REFERENCIAS DOM =====
+        const formStep1 = document.getElementById('form-step1');
+        const uploadZone = document.getElementById('upload-zone');
+        const fileInput = document.getElementById('file-input');
+        const fileName = document.getElementById('file-name');
+        const btnSubmit = document.getElementById('btn-submit');
+        const loader = document.getElementById('loader');
+
+        // ===== FUNCIONES AUXILIARES =====
+        function updateProgress(step) {
+            for (let i = 1; i <= 3; i++) {
+                const progressBar = document.getElementById(`progress-${i}`);
+                if (i < step) {
+                    progressBar.classList.add('completed');
+                    progressBar.classList.remove('active');
+                } else if (i === step) {
+                    progressBar.classList.add('active');
+                    progressBar.classList.remove('completed');
+                } else {
+                    progressBar.classList.remove('active', 'completed');
+                }
+            }
+        }
+
+        function showStep(step) {
+            document.querySelectorAll('.step').forEach(s => s.classList.remove('active'));
+            document.getElementById(`step-${step}`).classList.add('active');
+            currentStep = step;
+            updateProgress(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function validateField(fieldId, errorId, validator) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(errorId);
+            
+            if (!validator(field.value)) {
+                field.classList.add('error');
+                error.classList.add('show');
+                return false;
+            } else {
+                field.classList.remove('error');
+                error.classList.remove('show');
+                return true;
+            }
+        }
+
+        function generateQRCode() {
+            const qrContainer = document.getElementById('qr-container');
+            const nequiNumber = '3232516832';
+            // Usando API gratuita de generación de QR
+            const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Nequi:${nequiNumber}`;
+            qrContainer.innerHTML = `<img src="${qrURL}" alt="Código QR Nequi ${nequiNumber}">`;
+        }
+
+        function formatFileSize(bytes) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const sizes = ['Bytes', 'KB', 'MB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return Math.round(bytes / Math.pow(k, i) * 100) / 100 + ' ' + sizes[i];
+        }
+
+        function fileToBase64(file) {
+            return new Promise((resolve, reject) => {
+                const reader = new FileReader();
+                reader.onload = () => resolve(reader.result.split(',')[1]);
+                reader.onerror = reject;
+                reader.readAsDataURL(file);
+            });
+        }
+
+        // ===== PASO 1: VALIDACIÓN Y ENVÍO DEL FORMULARIO =====
+        formStep1.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            // Validaciones
+            const nombreValid = validateField('nombre', 'error-nombre', (val) => val.trim().length > 0);
+            const cedulaValid = validateField('cedula', 'error-cedula', (val) => /^[0-9]+$/.test(val.trim()));
+            const servicioValid = validateField('servicio', 'error-servicio', (val) => val.trim().length > 0);
+            const contratoValid = validateField('contrato', 'error-contrato', (val) => val.trim().length > 0);
+            const piscoValid = validateField('pisco', 'error-pisco', (val) => val.trim().length > 0);
+            const dondePagoValid = validateField('dondePago', 'error-dondePago', (val) => val.trim().length > 0);
+
+            if (!nombreValid || !cedulaValid || !servicioValid || !contratoValid || !piscoValid || !dondePagoValid) {
+                return;
+            }
+
+            // Guardar datos del formulario
+            formData = {
+                nombre: document.getElementById('nombre').value.trim(),
+                cedula: document.getElementById('cedula').value.trim(),
+                servicio: document.getElementById('servicio').value,
+                contrato: document.getElementById('contrato').value.trim(),
+                pisco: document.getElementById('pisco').value.trim(),
+                dondePago: document.getElementById('dondePago').value,
+                contacto: 'No proporcionado'
+            };
+
+            // Generar QR y avanzar al paso 2
+            // generateQRCode();
+            const dp = document.getElementById('dondePago').value;
+            const accountEl = document.getElementById('payment-account');
+            if (dp === 'Nequi') accountEl.textContent = '3235216832';
+            else if (dp === 'Bancolombia') accountEl.textContent = '72133789471';
+            else if (dp === 'Bancolombia Corresponsal') accountEl.textContent = 'Convenio 56566';
+            else if (dp === 'Davivienda') accountEl.textContent = '127669999972';
+            else if (dp === 'Llave Davivienda') accountEl.textContent = '@9003407247';
+            else if (dp === 'Efecty') accountEl.textContent = 'Convenio 111489';
+            showStep(2);
+        });
+
+                // ===== PASO 2: CARGA DE ARCHIVO (DRAG AND DROP) =====
+        uploadZone.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            uploadZone.classList.add('drag-over');
+        });
+
+        uploadZone.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('drag-over');
+        });
+
+        uploadZone.addEventListener('drop', (e) => {
+            e.preventDefault();
+            uploadZone.classList.remove('drag-over');
+            
+            if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+                fileInput.files = e.dataTransfer.files;
+                
+                // Disparar manualmente el evento change
+                const event = new Event('change', { bubbles: true });
+                fileInput.dispatchEvent(event);
+            }
+        });
+
+        // ===== PASO 2: CARGA DE ARCHIVO =====
+        uploadZone.addEventListener('click', () => {
+            fileInput.click();
+        });
+
+        fileInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            
+            if (!file) {
+                return;
+            }
+
+            // Validar tamaño (máx 5MB)
+            const maxSize = 5 * 1024 * 1024; // 5MB en bytes
+            if (file.size > maxSize) {
+                alert('❌ El archivo es demasiado grande. El tamaño máximo permitido es 5MB.');
+                fileInput.value = '';
+                return;
+            }
+
+            // Validar tipo
+            const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
+            if (!validTypes.includes(file.type)) {
+                alert('❌ Formato no válido. Por favor sube una imagen JPG, PNG o un archivo PDF.');
+                fileInput.value = '';
+                return;
+            }
+
+            // Archivo válido
+            uploadedFile = file;
+            uploadZone.classList.add('has-file');
+            fileName.textContent = `✓ ${file.name} (${formatFileSize(file.size)})`;
+            btnSubmit.disabled = false;
+        });
+
+        // ===== PASO 2: ENVÍO FINAL DEL COMPROBANTE =====
+        btnSubmit.addEventListener('click', async () => {
+            if (!uploadedFile) {
+                alert('⚠️ Por favor adjunta tu comprobante de pago antes de continuar.');
+                return;
+            }
+
+            // Validar URL de Google Apps Script
+            if (GOOGLE_SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
+                alert('⚠️ Error de configuración: La URL del Google Apps Script no ha sido configurada. Por favor contacta al administrador.');
+                return;
+            }
+
+            // Deshabilitar botón y mostrar loader
+            btnSubmit.disabled = true;
+            loader.classList.add('show');
+
+            try {
+                // Convertir archivo a base64
+                const base64 = await fileToBase64(uploadedFile);
+
+                // Preparar payload
+                const payload = {
+                    nombre: formData.nombre,
+                    cedula: formData.cedula,
+                    servicio: formData.servicio,
+                    contacto: formData.contacto || 'No proporcionado',
+                    contrato: formData.contrato,
+                    pisco: formData.pisco,
+                    dondePago: formData.dondePago,
+                    archivo: base64,
+                    nombreArchivo: uploadedFile.name,
+                    tipoArchivo: uploadedFile.type,
+                    timestamp: new Date().toISOString()
+                };
+
+                // Enviar a Google Apps Script usando POST estándar (text/plain para evitar preflight)
+                const response = await fetch(GOOGLE_SCRIPT_URL, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'text/plain;charset=utf-8'
+                    },
+                    body: JSON.stringify(payload)
+                });
+
+                const textResponse = await response.text();
+                let result;
+                
+                try {
+                    result = JSON.parse(textResponse);
+                } catch (e) {
+                    console.error("Respuesta HTML de Apps Script:", textResponse);
+                    
+                    if (textResponse.includes("Authorization is required") || textResponse.includes("autorización")) {
+                        throw new Error("Error: El script requiere autorización. Asegúrate de configurar 'Quién tiene acceso' a 'Cualquier persona' al implementar.");
+                    }
+                    if (textResponse.includes("Script function not found") || textResponse.includes("TypeError")) {
+                        throw new Error("Error interno en el script. Por favor, asegúrate de haber creado una 'Nueva versión' en Administrar implementaciones.");
+                    }
+                    
+                    throw new Error("El servidor devolvió un error inesperado. (¿Olvidaste publicar una Nueva Versión en Apps Script?).");
+                }
+
+                if (result.success) {
+                    loader.classList.remove('show');
+                    showStep(3);
+                } else {
+                    throw new Error(result.error || 'Error al procesar el comprobante');
+                }
+
+            } catch (error) {
+                console.error('Error al enviar:', error);
+                loader.classList.remove('show');
+                btnSubmit.disabled = false;
+                
+                alert('❌ ' + (error.message || 'Hubo un error al enviar tu comprobante. Por favor, verifica tu conexión e intenta nuevamente.'));
+            }
+        });
+
+        // ===== VALIDACIÓN EN TIEMPO REAL =====
+        document.getElementById('nombre').addEventListener('blur', () => {
+            validateField('nombre', 'error-nombre', (val) => val.trim().length > 0);
+        });
+
+        document.getElementById('cedula').addEventListener('blur', () => {
+            validateField('cedula', 'error-cedula', (val) => /^[0-9]+$/.test(val.trim()));
+        });
+
+        document.getElementById('servicio').addEventListener('change', () => {
+            validateField('servicio', 'error-servicio', (val) => val.trim().length > 0);
+        });
+        document.getElementById('contrato').addEventListener('blur', () => {
+            validateField('contrato', 'error-contrato', (val) => val.trim().length > 0);
+        });
+        document.getElementById('pisco').addEventListener('blur', () => {
+            validateField('pisco', 'error-pisco', (val) => val.trim().length > 0);
+        });
+        document.getElementById('dondePago').addEventListener('change', () => {
+            validateField('dondePago', 'error-dondePago', (val) => val.trim().length > 0);
+        });
+
+        // ===== INICIALIZACIÓN =====
+        updateProgress(1);
+    </script>
+</body>
+</html>
