@@ -310,21 +310,21 @@ function guardarEnSheets(registro) {
     const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
     const sheet = spreadsheet.getActiveSheet();
     
-    // Asegurar que existan las columnas hasta la 12
+    // Asegurar que existan las columnas hasta la 11
     const lastCol = sheet.getLastColumn();
-    if (lastCol < 9) sheet.getRange(1, 9).setValue('Fecha del comprobante').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
-    if (lastCol < 10) sheet.getRange(1, 10).setValue('Dónde pagó').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
-    if (lastCol < 11) sheet.getRange(1, 11).setValue('Usuario de pisco').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
-    
+    if (lastCol < 8) sheet.getRange(1, 8).setValue('Fecha del comprobante').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
+    if (lastCol < 9) sheet.getRange(1, 9).setValue('Dónde pagó').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
+    if (lastCol < 10) sheet.getRange(1, 10).setValue('Usuario de pisco').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
+    if (lastCol < 11) sheet.getRange(1, 11).setValue('Número de Contrato').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
     
     // Si es la primera vez, agregar encabezados iniciales
     if (sheet.getLastRow() === 0) {
       sheet.appendRow([
           'Timestamp', 'Nombre completo', 'Cédula', 'Servicio/Producto', 
           'Valor pagado', 'Link del comprobante', 'Estado de conciliación', 'Fecha del comprobante',
-          'Dónde pagó', 'Usuario de pisco'
+          'Dónde pagó', 'Usuario de pisco', 'Número de Contrato'
         ]);
-      sheet.getRange(1, 1, 1, 10).setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
+      sheet.getRange(1, 1, 1, 11).setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
       sheet.setFrozenRows(1);
     }
     
@@ -344,14 +344,15 @@ function guardarEnSheets(registro) {
       'Pendiente de verificar', 
       registro.fecha || 'No detectada',
       registro.dondePago || '',
-      registro.pisco || ''
+      registro.pisco || '',
+      registro.contrato || ''
     ]);
     
     const lastRow = sheet.getLastRow();
     
     // Estilos alternos de fila
     if (lastRow % 2 === 0) {
-      sheet.getRange(lastRow, 1, 1, 10).setBackground('#f9fafb');
+      sheet.getRange(lastRow, 1, 1, 11).setBackground('#f9fafb');
     }
     
     // Formato de Celda de Valor
@@ -371,6 +372,9 @@ function guardarEnSheets(registro) {
     
     // Formato Fecha OCR
     sheet.getRange(lastRow, 8).setFontColor('#4b5563');
+    
+    // Formato Número de Contrato
+    sheet.getRange(lastRow, 11).setFontColor('#4b5563');
     
   } catch (error) {
     Logger.log('Error al guardar en Sheets: ' + error.toString());
