@@ -310,6 +310,12 @@ function guardarEnSheets(registro) {
     const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
     const sheet = spreadsheet.getActiveSheet();
     
+    // Asegurar que existan suficientes columnas físicas en la hoja
+    const maxCols = sheet.getMaxColumns();
+    if (maxCols < 11) {
+      sheet.insertColumnsAfter(maxCols, 11 - maxCols);
+    }
+
     // Asegurar que existan las columnas hasta la 11
     const lastCol = sheet.getLastColumn();
     if (lastCol < 8) sheet.getRange(1, 8).setValue('Fecha del comprobante').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
@@ -334,7 +340,7 @@ function guardarEnSheets(registro) {
       valorFinal = `$ ${Number(valorFinal).toLocaleString('es-CO')} (Ref: ${registro.referencia})`;
     }
 
-    sheet.appendRow([
+    const rowData = [
       timestampFormateado, 
       registro.nombre, 
       registro.cedula, 
@@ -346,9 +352,20 @@ function guardarEnSheets(registro) {
       registro.dondePago || '',
       registro.pisco || '',
       registro.contrato || ''
-    ]);
+    ];
+
+    // Buscar la última fila real basándonos en la columna A (Timestamp)
+    const colA = sheet.getRange("A:A").getValues();
+    let trueLastRow = 0;
+    for (let i = colA.length - 1; i >= 0; i--) {
+      if (colA[i][0] && colA[i][0].toString().trim() !== '') {
+        trueLastRow = i + 1;
+        break;
+      }
+    }
     
-    const lastRow = sheet.getLastRow();
+    const lastRow = trueLastRow + 1;
+    sheet.getRange(lastRow, 1, 1, rowData.length).setValues([rowData]);
     
     // Estilos alternos de fila
     if (lastRow % 2 === 0) {
