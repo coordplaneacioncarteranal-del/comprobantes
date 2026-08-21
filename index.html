@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Reporte de Pago â€” Nequi</title>
+    <title>Portal de Reporte de Pago - Nequi</title>
     <style>
         * {
             margin: 0;
@@ -415,7 +415,7 @@
         <div class="header">
             <img src="LOGO JARDINES.png" alt="Jardines del Renacer" class="header-logo">
             <h1>Portal de Reporte de Pago</h1>
-            <p>Sistema de conciliaciÃ³n Nequi</p>
+            <p>Sistema de conciliación de comprobantes</p>
         </div>
 
         <div class="progress-bar">
@@ -428,23 +428,23 @@
             <!-- PASO 1: DATOS DEL CLIENTE -->
             <div class="step active" id="step-1">
                 <h2 class="step-title">Paso 1: Datos del Reporte</h2>
-                <p class="step-description">Completa los datos del cliente y el mÃ©todo de pago</p>
+                <p class="step-description">Completa los datos del cliente y el método de pago</p>
 
                 <div class="info-box">
-                    â„¹ï¸ <strong>Importante:</strong> Verifica que el comprobante que vas a subir corresponda a la cuenta seleccionada.
+                    ℹ️ <strong>Importante:</strong> Verifica que el comprobante que vas a subir corresponda a la cuenta seleccionada.
                 </div>
 
                 <form id="form-step1">
                     <div class="form-group">
                         <label for="nombre" class="required">Nombre completo del cliente</label>
-                        <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan PÃ©rez GarcÃ­a">
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez García">
                         <div class="error-message" id="error-nombre">Este campo es obligatorio</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="cedula" class="required">NÃºmero de cÃ©dula del cliente</label>
-                        <input type="text" id="cedula" name="cedula" required placeholder="Solo nÃºmeros" pattern="[0-9]+">
-                        <div class="error-message" id="error-cedula">Ingresa solo nÃºmeros</div>
+                        <label for="cedula" class="required">Número de cédula del cliente</label>
+                        <input type="text" id="cedula" name="cedula" required placeholder="Solo números" pattern="[0-9]+">
+                        <div class="error-message" id="error-cedula">Ingresa solo números</div>
                     </div>
 
                     <div class="form-group">
@@ -458,7 +458,7 @@
 
                     
                     <div class="form-group">
-                        <label for="contrato" class="required">NÃºmero de Contrato</label>
+                        <label for="contrato" class="required">Número de Contrato</label>
                         <input type="text" id="contrato" name="contrato" required placeholder="Ej: 12345">
                         <div class="error-message" id="error-contrato">Este campo es obligatorio</div>
                     </div>
@@ -831,17 +831,17 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="dondePago" class="required">DÃ³nde pagÃ³</label>
+                        <label for="dondePago" class="required">Dónde pagó</label>
                         <select id="dondePago" name="dondePago" required>
-                            <option value="">Selecciona una opciÃ³n</option>
-                            <option value="Nequi">Nequi (3235216832 DoÃ±a Adriana)</option>
+                            <option value="">Selecciona una opción</option>
+                            <option value="Nequi">Nequi (3235216832 Doña Adriana)</option>
                             <option value="Bancolombia">Bancolombia (72133789471)</option>
                             <option value="Bancolombia Corresponsal">Bancolombia Corresponsal (Convenio 56566)</option>
                             <option value="Davivienda">Davivienda (127669999972)</option>
                             <option value="Llave Davivienda">Llave Davivienda (@9003407247)</option>
                             <option value="Efecty">Efecty (Convenio 111489)</option>
                         </select>
-                        <div class="error-message" id="error-dondePago">Selecciona dÃ³nde pagÃ³ el cliente</div>
+                        <div class="error-message" id="error-dondePago">Selecciona dónde pagó el cliente</div>
                     </div>
 
 
@@ -861,28 +861,28 @@
                     <div class="nequi-number" id="payment-account" style="font-size: 24px; letter-spacing: 2px;">---</div>
                 </div>
                 <div class="alert">
-                    <span class="alert-icon">âš ï¸</span>
+                    <span class="alert-icon">⚠️</span>
                     <span class="alert-text">
-                        <strong>Â¡IMPORTANTE!</strong> AsegÃºrate de adjuntar el comprobante correcto. El sistema leerÃ¡ automÃ¡ticamente el monto y la fecha. El sistema leerÃ¡ automÃ¡ticamente el monto transferido.
+                        <strong>¡IMPORTANTE!</strong> Asegúrate de adjuntar el comprobante correcto. El sistema leerá automáticamente el monto y la fecha. El sistema leerá automáticamente el monto transferido.
                     </span>
                 </div>
 
                 <div class="example-container" style="text-align: center; margin-bottom: 20px; background: white; border-radius: 12px; padding: 15px; border: 1px solid #e5e7eb;">
-                    <p style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 10px;">ðŸ“¸ AsÃ­ debe verse tu captura:</p>
-                    <img src="ejemplo.png" alt="Ejemplo de comprobante vÃ¡lido" style="max-height: 250px; width: auto; border-radius: 8px; border: 2px solid #10b981;" onerror="this.style.display='none';">
-                    <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">Debe incluir el nÃºmero Nequi destino <strong>323 251 6832</strong> y ser legible.</p>
+                    <p style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 10px;">📸 Así debe verse tu captura:</p>
+                    <img src="ejemplo.png" alt="Ejemplo de comprobante válido" style="max-height: 250px; width: auto; border-radius: 8px; border: 2px solid #10b981;" onerror="this.style.display='none';">
+                    <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">Debe incluir el número Nequi destino <strong>323 251 6832</strong> y ser legible.</p>
                 </div>
 
                 <div class="file-upload-zone" id="upload-zone">
                     <input type="file" id="file-input" accept="image/*,.pdf" required>
-                    <div class="upload-icon">ðŸ“¸</div>
-                    <div class="upload-text">Arrastra o toca aquÃ­ para adjuntar comprobante</div>
-                    <div class="upload-subtext">Formatos: JPG, PNG o PDF (mÃ¡x. 5MB)</div>
+                    <div class="upload-icon">📸</div>
+                    <div class="upload-text">Arrastra o toca aquí para adjuntar comprobante</div>
+                    <div class="upload-subtext">Formatos: JPG, PNG o PDF (máx. 5MB)</div>
                     <div class="file-name" id="file-name"></div>
                 </div>
 
                 <button type="button" class="btn btn-primary" id="btn-submit" disabled>
-                    Enviar comprobante âœ“
+                    Enviar comprobante ✓
                 </button>
 
                 <div class="loader" id="loader">
@@ -894,12 +894,12 @@
             <!-- PASO 3: CONFIRMACIÃ“N -->
             <div class="step" id="step-3">
                 <div class="success-message">
-                    <div class="success-icon">âœ“</div>
-                    <h2>Â¡Pago reportado con Ã©xito!</h2>
+                    <div class="success-icon">✓</div>
+                    <h2>¡Pago reportado con éxito!</h2>
                     <p>Hemos recibido y registrado tu comprobante de pago correctamente.</p>
-                    <p><strong>Nuestro equipo de Cartera verificarÃ¡ tu pago en las prÃ³ximas 24-48 horas.</strong></p>
+                    <p><strong>Nuestro equipo de Cartera verificará tu pago en las próximas 24-48 horas.</strong></p>
                     <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 14px;">
-                        Si tienes alguna duda sobre tu pago, contacta a nuestro equipo de atenciÃ³n al cliente.
+                        Si tienes alguna duda sobre tu pago, contacta a nuestro equipo de atención al cliente.
                     </p>
                 </div>
             </div>
@@ -966,9 +966,9 @@
         function generateQRCode() {
             const qrContainer = document.getElementById('qr-container');
             const nequiNumber = '3232516832';
-            // Usando API gratuita de generaciÃ³n de QR
+            // Usando API gratuita de generación de QR
             const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Nequi:${nequiNumber}`;
-            qrContainer.innerHTML = `<img src="${qrURL}" alt="CÃ³digo QR Nequi ${nequiNumber}">`;
+            qrContainer.innerHTML = `<img src="${qrURL}" alt="Código QR Nequi ${nequiNumber}">`;
         }
 
         function formatFileSize(bytes) {
@@ -1064,10 +1064,10 @@
                 return;
             }
 
-            // Validar tamaÃ±o (mÃ¡x 5MB)
+            // Validar tamaño (máx 5MB)
             const maxSize = 5 * 1024 * 1024; // 5MB en bytes
             if (file.size > maxSize) {
-                alert('âŒ El archivo es demasiado grande. El tamaÃ±o mÃ¡ximo permitido es 5MB.');
+                alert('❌ El archivo es demasiado grande. El tamaño máximo permitido es 5MB.');
                 fileInput.value = '';
                 return;
             }
@@ -1075,32 +1075,32 @@
             // Validar tipo
             const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
             if (!validTypes.includes(file.type)) {
-                alert('âŒ Formato no vÃ¡lido. Por favor sube una imagen JPG, PNG o un archivo PDF.');
+                alert('❌ Formato no válido. Por favor sube una imagen JPG, PNG o un archivo PDF.');
                 fileInput.value = '';
                 return;
             }
 
-            // Archivo vÃ¡lido
+            // Archivo válido
             uploadedFile = file;
             uploadZone.classList.add('has-file');
-            fileName.textContent = `âœ“ ${file.name} (${formatFileSize(file.size)})`;
+            fileName.textContent = `✓ ${file.name} (${formatFileSize(file.size)})`;
             btnSubmit.disabled = false;
         });
 
         // ===== PASO 2: ENVÃO FINAL DEL COMPROBANTE =====
         btnSubmit.addEventListener('click', async () => {
             if (!uploadedFile) {
-                alert('âš ï¸ Por favor adjunta tu comprobante de pago antes de continuar.');
+                alert('⚠️ Por favor adjunta tu comprobante de pago antes de continuar.');
                 return;
             }
 
             // Validar URL de Google Apps Script
             if (GOOGLE_SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
-                alert('âš ï¸ Error de configuraciÃ³n: La URL del Google Apps Script no ha sido configurada. Por favor contacta al administrador.');
+                alert('⚠️ Error de configuración: La URL del Google Apps Script no ha sido configurada. Por favor contacta al administrador.');
                 return;
             }
 
-            // Deshabilitar botÃ³n y mostrar loader
+            // Deshabilitar botón y mostrar loader
             btnSubmit.disabled = true;
             loader.classList.add('show');
 
@@ -1123,7 +1123,7 @@
                     timestamp: new Date().toISOString()
                 };
 
-                // Enviar a Google Apps Script usando POST estÃ¡ndar (text/plain para evitar preflight)
+                // Enviar a Google Apps Script usando POST estándar (text/plain para evitar preflight)
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     headers: {
@@ -1140,14 +1140,14 @@
                 } catch (e) {
                     console.error("Respuesta HTML de Apps Script:", textResponse);
                     
-                    if (textResponse.includes("Authorization is required") || textResponse.includes("autorizaciÃ³n")) {
-                        throw new Error("Error: El script requiere autorizaciÃ³n. AsegÃºrate de configurar 'QuiÃ©n tiene acceso' a 'Cualquier persona' al implementar.");
+                    if (textResponse.includes("Authorization is required") || textResponse.includes("autorización")) {
+                        throw new Error("Error: El script requiere autorización. Asegúrate de configurar 'Quién tiene acceso' a 'Cualquier persona' al implementar.");
                     }
                     if (textResponse.includes("Script function not found") || textResponse.includes("TypeError")) {
-                        throw new Error("Error interno en el script. Por favor, asegÃºrate de haber creado una 'Nueva versiÃ³n' en Administrar implementaciones.");
+                        throw new Error("Error interno en el script. Por favor, asegúrate de haber creado una 'Nueva versión' en Administrar implementaciones.");
                     }
                     
-                    throw new Error("El servidor devolviÃ³ un error inesperado. (Â¿Olvidaste publicar una Nueva VersiÃ³n en Apps Script?).");
+                    throw new Error("El servidor devolvió un error inesperado. (¿Olvidaste publicar una Nueva Versión en Apps Script?).");
                 }
 
                 if (result.success) {
@@ -1162,7 +1162,7 @@
                 loader.classList.remove('show');
                 btnSubmit.disabled = false;
                 
-                alert('âŒ ' + (error.message || 'Hubo un error al enviar tu comprobante. Por favor, verifica tu conexiÃ³n e intenta nuevamente.'));
+                alert('❌ ' + (error.message || 'Hubo un error al enviar tu comprobante. Por favor, verifica tu conexión e intenta nuevamente.'));
             }
         });
 
@@ -1193,6 +1193,7 @@
     </script>
 </body>
 </html>
+
 
 
 
