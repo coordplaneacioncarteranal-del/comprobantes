@@ -1,9 +1,9 @@
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Reporte de Pago — Nequi</title>
+    <title>Portal de Reporte de Pago â€” Nequi</title>
     <style>
         * {
             margin: 0;
@@ -415,7 +415,7 @@
         <div class="header">
             <img src="LOGO JARDINES.png" alt="Jardines del Renacer" class="header-logo">
             <h1>Portal de Reporte de Pago</h1>
-            <p>Sistema de conciliación Nequi</p>
+            <p>Sistema de conciliaciÃ³n Nequi</p>
         </div>
 
         <div class="progress-bar">
@@ -428,23 +428,23 @@
             <!-- PASO 1: DATOS DEL CLIENTE -->
             <div class="step active" id="step-1">
                 <h2 class="step-title">Paso 1: Datos del Reporte</h2>
-                <p class="step-description">Completa los datos del cliente y el método de pago</p>
+                <p class="step-description">Completa los datos del cliente y el mÃ©todo de pago</p>
 
                 <div class="info-box">
-                    ℹ️ <strong>Importante:</strong> Verifica que el comprobante que vas a subir corresponda a la cuenta seleccionada.
+                    â„¹ï¸ <strong>Importante:</strong> Verifica que el comprobante que vas a subir corresponda a la cuenta seleccionada.
                 </div>
 
                 <form id="form-step1">
                     <div class="form-group">
                         <label for="nombre" class="required">Nombre completo del cliente</label>
-                        <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan Pérez García">
+                        <input type="text" id="nombre" name="nombre" required placeholder="Ej: Juan PÃ©rez GarcÃ­a">
                         <div class="error-message" id="error-nombre">Este campo es obligatorio</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="cedula" class="required">Número de cédula del cliente</label>
-                        <input type="text" id="cedula" name="cedula" required placeholder="Solo números" pattern="[0-9]+">
-                        <div class="error-message" id="error-cedula">Ingresa solo números</div>
+                        <label for="cedula" class="required">NÃºmero de cÃ©dula del cliente</label>
+                        <input type="text" id="cedula" name="cedula" required placeholder="Solo nÃºmeros" pattern="[0-9]+">
+                        <div class="error-message" id="error-cedula">Ingresa solo nÃºmeros</div>
                     </div>
 
                     <div class="form-group">
@@ -458,33 +458,394 @@
 
                     
                     <div class="form-group">
-                        <label for="contrato" class="required">Número de Contrato</label>
+                        <label for="contrato" class="required">NÃºmero de Contrato</label>
                         <input type="text" id="contrato" name="contrato" required placeholder="Ej: 12345">
                         <div class="error-message" id="error-contrato">Este campo es obligatorio</div>
                     </div>
 
                     <div class="form-group">
                         <label for="pisco" class="required">Usuario de pisco</label>
-                        <input type="text" id="pisco" name="pisco" required placeholder="Usuario del sistema">
+                        <input type="text" id="pisco" name="pisco" list="pisco-options" required placeholder="Escribe para buscar un usuario..." autocomplete="off">
+                        <datalist id="pisco-options">
+                            <option value="ABEL-ARIZA">ABEL-ARIZA</option>
+                            <option value="ALBA-DIGCAS">ALBA-DIGCAS</option>
+                            <option value="ALBA-RIVRIV">ALBA-RIVRIV</option>
+                            <option value="ALBEIRO-CA">ALBEIRO-CA</option>
+                            <option value="ALBERTO-MO">ALBERTO-MO</option>
+                            <option value="ALCALA-MUR">ALCALA-MUR</option>
+                            <option value="ALEJANDRA-VANCAS">ALEJANDRA-VANCAS</option>
+                            <option value="ALEJAN-SAL">ALEJAN-SAL</option>
+                            <option value="ALEX-CAICE">ALEX-CAICE</option>
+                            <option value="ALEX-GILAL">ALEX-GILAL</option>
+                            <option value="ALEX-MARNA">ALEX-MARNA</option>
+                            <option value="ALEX-REYRO">ALEX-REYRO</option>
+                            <option value="ALEX-SEVIL">ALEX-SEVIL</option>
+                            <option value="ALEX-VAL">ALEX-VAL</option>
+                            <option value="A-MARMATO">A-MARMATO</option>
+                            <option value="ANA-BETGRA">ANA-BETGRA</option>
+                            <option value="ANA-GUZVEL">ANA-GUZVEL</option>
+                            <option value="ANA-MURPAL">ANA-MURPAL</option>
+                            <option value="ANA-RESPIE">ANA-RESPIE</option>
+                            <option value="ANDA-LUIS">ANDA-LUIS</option>
+                            <option value="ANDRES-ARABAR">ANDRES-ARABAR</option>
+                            <option value="ANDRES-GAR">ANDRES-GAR</option>
+                            <option value="ANDRES-GRA">ANDRES-GRA</option>
+                            <option value="ANGEE-RAMGUE">ANGEE-RAMGUE</option>
+                            <option value="ANGELA-LOPGON">ANGELA-LOPGON</option>
+                            <option value="ANGELA-VILCRU">ANGELA-VILCRU</option>
+                            <option value="ANGELICA-GAVSAN">ANGELICA-GAVSAN</option>
+                            <option value="ANGELIE-FUEBAR">ANGELIE-FUEBAR</option>
+                            <option value="ANGGE-TARACO">ANGGE-TARACO</option>
+                            <option value="ANGIE-NUÑNIE">ANGIE-NUÑNIE</option>
+                            <option value="ANGIE-URBMAR">ANGIE-URBMAR</option>
+                            <option value="ANGIE-VILGAR">ANGIE-VILGAR</option>
+                            <option value="ANSER-YHON">ANSER-YHON</option>
+                            <option value="ANYI-COSBAÑ">ANYI-COSBAÑ</option>
+                            <option value="ARG-YHON">ARG-YHON</option>
+                            <option value="ARM-JUAND">ARM-JUAND</option>
+                            <option value="AURA-LALJUR">AURA-LALJUR</option>
+                            <option value="BLANCA-VASSAL">BLANCA-VASSAL</option>
+                            <option value="B-MARMATO">B-MARMATO</option>
+                            <option value="BOLIV-JOSE">BOLIV-JOSE</option>
+                            <option value="BRAIAN-BER">BRAIAN-BER</option>
+                            <option value="BRAYAN-ANA">BRAYAN-ANA</option>
+                            <option value="BRAYAN-TOC">BRAYAN-TOC</option>
+                            <option value="CA-EDILSON">CA-EDILSON</option>
+                            <option value="CAMILA-MARLOP">CAMILA-MARLOP</option>
+                            <option value="CAMILO-LOP">CAMILO-LOP</option>
+                            <option value="CARLO-ROA">CARLO-ROA</option>
+                            <option value="CARLOS-AGU">CARLOS-AGU</option>
+                            <option value="CARLOS-FLO">CARLOS-FLO</option>
+                            <option value="CARLO-TOR">CARLO-TOR</option>
+                            <option value="CAR-MATEO">CAR-MATEO</option>
+                            <option value="CAROLINA-CASPIN">CAROLINA-CASPIN</option>
+                            <option value="CAR-YHON">CAR-YHON</option>
+                            <option value="CESAR-JARCAR">CESAR-JARCAR</option>
+                            <option value="CESAR-RINC">CESAR-RINC</option>
+                            <option value="CH-EDISON">CH-EDISON</option>
+                            <option value="CHRISTIAN-MARRES">CHRISTIAN-MARRES</option>
+                            <option value="CINDY-ESPZUL">CINDY-ESPZUL</option>
+                            <option value="CLAUDIA-ARRMON">CLAUDIA-ARRMON</option>
+                            <option value="CLAUDIA-MO">CLAUDIA-MO</option>
+                            <option value="COOP-YEI">COOP-YEI</option>
+                            <option value="CRISTIAN-DROROD">CRISTIAN-DROROD</option>
+                            <option value="CRISTO-BAL">CRISTO-BAL</option>
+                            <option value="DAHIANA-GONVAR">DAHIANA-GONVAR</option>
+                            <option value="DANIELA-GONROM">DANIELA-GONROM</option>
+                            <option value="DANIELA-MEJCOR">DANIELA-MEJCOR</option>
+                            <option value="DANIELA-RUIPOR">DANIELA-RUIPOR</option>
+                            <option value="DANIEL-MAH">DANIEL-MAH</option>
+                            <option value="DANIEL-ROLBLA">DANIEL-ROLBLA</option>
+                            <option value="DANY-FER">DANY-FER</option>
+                            <option value="DAVID-ALE">DAVID-ALE</option>
+                            <option value="DAVID-FLOTRE">DAVID-FLOTRE</option>
+                            <option value="DEICY-ORTVAL">DEICY-ORTVAL</option>
+                            <option value="DIANA-GALVAR">DIANA-GALVAR</option>
+                            <option value="DIANA-GUTFRAN">DIANA-GUTFRAN</option>
+                            <option value="DIANA-MARBOR">DIANA-MARBOR</option>
+                            <option value="DIANA-MILLON">DIANA-MILLON</option>
+                            <option value="DIANA-RIOGON">DIANA-RIOGON</option>
+                            <option value="DIANA-VAL">DIANA-VAL</option>
+                            <option value="DIEGO-MOR">DIEGO-MOR</option>
+                            <option value="DIEGO-SALARI">DIEGO-SALARI</option>
+                            <option value="DORIAN-GAV">DORIAN-GAV</option>
+                            <option value="EBELIN-BUIGON">EBELIN-BUIGON</option>
+                            <option value="EDNA-MONRIV">EDNA-MONRIV</option>
+                            <option value="EDNA-ROBTOR">EDNA-ROBTOR</option>
+                            <option value="EDUAR-CASR">EDUAR-CASR</option>
+                            <option value="EDUARDO-MU">EDUARDO-MU</option>
+                            <option value="EDWIN-GAR">EDWIN-GAR</option>
+                            <option value="ELIZABETH-GUTCAS">ELIZABETH-GUTCAS</option>
+                            <option value="ELSI-MANHER">ELSI-MANHER</option>
+                            <option value="EMERSON-OM">EMERSON-OM</option>
+                            <option value="ERIKA-GARCAR">ERIKA-GARCAR</option>
+                            <option value="ERIKA-GORLOZ">ERIKA-GORLOZ</option>
+                            <option value="ERIKA-VILLA">ERIKA-VILLA</option>
+                            <option value="ESTER-MUNPAY">ESTER-MUNPAY</option>
+                            <option value="EVELIN-REYDUC">EVELIN-REYDUC</option>
+                            <option value="FACIL-MASC">FACIL-MASC</option>
+                            <option value="FERNANDO-B">FERNANDO-B</option>
+                            <option value="FERNANDO-V">FERNANDO-V</option>
+                            <option value="FREDY-TAB">FREDY-TAB</option>
+                            <option value="GABRIELA-CASLEA">GABRIELA-CASLEA</option>
+                            <option value="GERONIMO-VELGIR">GERONIMO-VELGIR</option>
+                            <option value="GINA-ARMMUE">GINA-ARMMUE</option>
+                            <option value="GINA-ENCALV">GINA-ENCALV</option>
+                            <option value="GINA-ZAPROM">GINA-ZAPROM</option>
+                            <option value="GINO-BAN">GINO-BAN</option>
+                            <option value="GIR-WILLIA">GIR-WILLIA</option>
+                            <option value="GISELA-MAHACO">GISELA-MAHACO</option>
+                            <option value="GLORIA-PULSAB">GLORIA-PULSAB</option>
+                            <option value="GUSTAVO-RS">GUSTAVO-RS</option>
+                            <option value="HAROLD-GRI">HAROLD-GRI</option>
+                            <option value="HAROLD-RIO">HAROLD-RIO</option>
+                            <option value="HECTOR-HF">HECTOR-HF</option>
+                            <option value="HECTOR-MS">HECTOR-MS</option>
+                            <option value="HECTOR-OSP">HECTOR-OSP</option>
+                            <option value="HEDERT-GE">HEDERT-GE</option>
+                            <option value="HEIDER-LONROS">HEIDER-LONROS</option>
+                            <option value="HEINER-MOR">HEINER-MOR</option>
+                            <option value="HELEIN-AGUHER">HELEIN-AGUHER</option>
+                            <option value="HEMELINA-T">HEMELINA-T</option>
+                            <option value="HENRRY-YAR">HENRRY-YAR</option>
+                            <option value="HERMAN-TRECAR">HERMAN-TRECAR</option>
+                            <option value="HONDA-SAND">HONDA-SAND</option>
+                            <option value="INDIRA-REN">INDIRA-REN</option>
+                            <option value="JACINTO-GONLOP">JACINTO-GONLOP</option>
+                            <option value="JAIDER-GUA">JAIDER-GUA</option>
+                            <option value="JAIME-ICON">JAIME-ICON</option>
+                            <option value="JAIME-RUE">JAIME-RUE</option>
+                            <option value="JAIRO-PALM">JAIRO-PALM</option>
+                            <option value="JAIRO-TOR">JAIRO-TOR</option>
+                            <option value="JAIRO-VILL">JAIRO-VILL</option>
+                            <option value="JARIN-SALC">JARIN-SALC</option>
+                            <option value="JAVIER-LOP">JAVIER-LOP</option>
+                            <option value="JAVIER-RL">JAVIER-RL</option>
+                            <option value="JAVIER-TOR">JAVIER-TOR</option>
+                            <option value="JEAN-CAB">JEAN-CAB</option>
+                            <option value="JEAN-CARL">JEAN-CARL</option>
+                            <option value="JENIFER-RUIRAM">JENIFER-RUIRAM</option>
+                            <option value="JENNIFER-BARZEM">JENNIFER-BARZEM</option>
+                            <option value="JENNIFER-ECHGIR">JENNIFER-ECHGIR</option>
+                            <option value="JENNIFER-MARCAR">JENNIFER-MARCAR</option>
+                            <option value="JESSICA-DOMRAM">JESSICA-DOMRAM</option>
+                            <option value="JESSICA-LOPLOP">JESSICA-LOPLOP</option>
+                            <option value="JESSICA-MUNHOY">JESSICA-MUNHOY</option>
+                            <option value="JESSICA-TORMAR">JESSICA-TORMAR</option>
+                            <option value="JESUS-ABDU">JESUS-ABDU</option>
+                            <option value="JESUS-GAR">JESUS-GAR</option>
+                            <option value="JESUS-GIR">JESUS-GIR</option>
+                            <option value="JESUS-GON">JESUS-GON</option>
+                            <option value="JESUS-GV">JESUS-GV</option>
+                            <option value="JESUS-HERGUI">JESUS-HERGUI</option>
+                            <option value="JHAN-PAL">JHAN-PAL</option>
+                            <option value="JHON-ALV">JHON-ALV</option>
+                            <option value="JHONA-OSON">JHONA-OSON</option>
+                            <option value="JHONFRAN-VALPIM">JHONFRAN-VALPIM</option>
+                            <option value="JHON-PATNI">JHON-PATNI</option>
+                            <option value="JHO-SOTO">JHO-SOTO</option>
+                            <option value="JIMER-TOR">JIMER-TOR</option>
+                            <option value="JOHANA-GARZAM">JOHANA-GARZAM</option>
+                            <option value="JOHANA-MORA">JOHANA-MORA</option>
+                            <option value="JOHANNA-PERHUE">JOHANNA-PERHUE</option>
+                            <option value="JONATHAN-O">JONATHAN-O</option>
+                            <option value="JONATHAN-STIARI">JONATHAN-STIARI</option>
+                            <option value="JONNATAN-GOMGOM">JONNATAN-GOMGOM</option>
+                            <option value="JONNY-DOM">JONNY-DOM</option>
+                            <option value="JORGE-GALE">JORGE-GALE</option>
+                            <option value="JORGE-GAR">JORGE-GAR</option>
+                            <option value="JORGE-RES">JORGE-RES</option>
+                            <option value="JORGE-ZAPCAR">JORGE-ZAPCAR</option>
+                            <option value="JOSE-ARACA">JOSE-ARACA</option>
+                            <option value="JOSE-CORIC">JOSE-CORIC</option>
+                            <option value="JOSE-DOR">JOSE-DOR</option>
+                            <option value="JOSE-GRICAR">JOSE-GRICAR</option>
+                            <option value="JOSE-MARGA">JOSE-MARGA</option>
+                            <option value="JOSE-MOLDU">JOSE-MOLDU</option>
+                            <option value="JOSE-PACOR">JOSE-PACOR</option>
+                            <option value="JOSE-PAEMO">JOSE-PAEMO</option>
+                            <option value="JOSE-ROD">JOSE-ROD</option>
+                            <option value="JOSE-TAB">JOSE-TAB</option>
+                            <option value="JUAN-AGUTAB">JUAN-AGUTAB</option>
+                            <option value="JUAN-CASVAL">JUAN-CASVAL</option>
+                            <option value="JUAN-FRESN">JUAN-FRESN</option>
+                            <option value="JUAN-GALCAR">JUAN-GALCAR</option>
+                            <option value="JUAN-LINCAL">JUAN-LINCAL</option>
+                            <option value="JUAN-LONPIE">JUAN-LONPIE</option>
+                            <option value="JUAN-MARESP">JUAN-MARESP</option>
+                            <option value="JUAN-MARIQ">JUAN-MARIQ</option>
+                            <option value="JUAN-MARM">JUAN-MARM</option>
+                            <option value="JUAN-MOGUZ">JUAN-MOGUZ</option>
+                            <option value="JUAN-MOLI">JUAN-MOLI</option>
+                            <option value="JUAN-PIMO">JUAN-PIMO</option>
+                            <option value="JUAN-RIOSU">JUAN-RIOSU</option>
+                            <option value="JUAN-RIV">JUAN-RIV</option>
+                            <option value="JULIANA-LONOSP">JULIANA-LONOSP</option>
+                            <option value="JULIAN-SAANEI">JULIAN-SAANEI</option>
+                            <option value="JULIO-CEB">JULIO-CEB</option>
+                            <option value="JULIO-DUQMON">JULIO-DUQMON</option>
+                            <option value="KAREN-ARARIA">KAREN-ARARIA</option>
+                            <option value="KAREN-BUETAP">KAREN-BUETAP</option>
+                            <option value="KAREN-FRACAS">KAREN-FRACAS</option>
+                            <option value="KAREN-HERMUN">KAREN-HERMUN</option>
+                            <option value="KAREN-LINCAS">KAREN-LINCAS</option>
+                            <option value="KAROL-MEJBON">KAROL-MEJBON</option>
+                            <option value="KAROL-VILGAR">KAROL-VILGAR</option>
+                            <option value="KATHERIN-CHATAP">KATHERIN-CHATAP</option>
+                            <option value="KATHERINE-SANZAP">KATHERINE-SANZAP</option>
+                            <option value="KELLY-ARBGON">KELLY-ARBGON</option>
+                            <option value="KELLY-CASCAR">KELLY-CASCAR</option>
+                            <option value="KELLY-MORMIR">KELLY-MORMIR</option>
+                            <option value="KEVIN-MORR">KEVIN-MORR</option>
+                            <option value="LAURA-ECHARA">LAURA-ECHARA</option>
+                            <option value="LAURA-LOPHEN">LAURA-LOPHEN</option>
+                            <option value="LAURA-ORJMAL">LAURA-ORJMAL</option>
+                            <option value="LAURA-PINROM">LAURA-PINROM</option>
+                            <option value="LAURA-RAMRAM">LAURA-RAMRAM</option>
+                            <option value="LAURA-RUBCAM">LAURA-RUBCAM</option>
+                            <option value="LAURA-TAPHER">LAURA-TAPHER</option>
+                            <option value="LEIDY-BERMUDEZ">LEIDY-BERMUDEZ</option>
+                            <option value="LEIDY-GONPED">LEIDY-GONPED</option>
+                            <option value="LEIDY-HIDVAL">LEIDY-HIDVAL</option>
+                            <option value="LEIDY-ORTSAN">LEIDY-ORTSAN</option>
+                            <option value="LEIDY-OSODIA">LEIDY-OSODIA</option>
+                            <option value="LEIDY-SUAGAV">LEIDY-SUAGAV</option>
+                            <option value="LEIDY-URBPOT">LEIDY-URBPOT</option>
+                            <option value="LEO-OSOARI">LEO-OSOARI</option>
+                            <option value="LERID-JHON">LERID-JHON</option>
+                            <option value="LICET-USUCAR">LICET-USUCAR</option>
+                            <option value="LINA-ALZGAR">LINA-ALZGAR</option>
+                            <option value="LINA-GOMRIN">LINA-GOMRIN</option>
+                            <option value="LINA-GONART">LINA-GONART</option>
+                            <option value="LINA-USUPIN">LINA-USUPIN</option>
+                            <option value="LINA-VANSAL">LINA-VANSAL</option>
+                            <option value="LISETH-DODRIN">LISETH-DODRIN</option>
+                            <option value="LIZETT-AGUAMA">LIZETT-AGUAMA</option>
+                            <option value="LORENA-RAMGON">LORENA-RAMGON</option>
+                            <option value="LUCY-CESROD">LUCY-CESROD</option>
+                            <option value="LUISA-ARACOR">LUISA-ARACOR</option>
+                            <option value="LUIS-BAL">LUIS-BAL</option>
+                            <option value="LUIS-PINPI">LUIS-PINPI</option>
+                            <option value="LUIS-REY">LUIS-REY</option>
+                            <option value="LUIS-SOLED">LUIS-SOLED</option>
+                            <option value="LUZ-ARIAGU">LUZ-ARIAGU</option>
+                            <option value="LUZ-MARBUE">LUZ-MARBUE</option>
+                            <option value="LUZ-PATPAL">LUZ-PATPAL</option>
+                            <option value="LUZ-VILMON">LUZ-VILMON</option>
+                            <option value="MAN-GARCAR">MAN-GARCAR</option>
+                            <option value="MARGARITA-BERSER">MARGARITA-BERSER</option>
+                            <option value="MARIA-ALEVIL">MARIA-ALEVIL</option>
+                            <option value="MARIA-HINHUR">MARIA-HINHUR</option>
+                            <option value="MARIA-MELROD">MARIA-MELROD</option>
+                            <option value="MARIANA-ACOALF">MARIANA-ACOALF</option>
+                            <option value="MARIANA-MUNGON">MARIANA-MUNGON</option>
+                            <option value="MARIANA-ORDBUI">MARIANA-ORDBUI</option>
+                            <option value="MARIA-RAMGAR">MARIA-RAMGAR</option>
+                            <option value="MARIA-RINCAS">MARIA-RINCAS</option>
+                            <option value="MARIA-VAL">MARIA-VAL</option>
+                            <option value="MARIO-MONS">MARIO-MONS</option>
+                            <option value="MARISOL-GL">MARISOL-GL</option>
+                            <option value="MARMA-JUAN">MARMA-JUAN</option>
+                            <option value="MARTHA-FRAGIR">MARTHA-FRAGIR</option>
+                            <option value="MARYI-RAMGAL">MARYI-RAMGAL</option>
+                            <option value="MATEO-HEN">MATEO-HEN</option>
+                            <option value="MATEO-PARAEV">MATEO-PARAEV</option>
+                            <option value="MAURICIO-GALFRA">MAURICIO-GALFRA</option>
+                            <option value="MAYRA-SANCAS">MAYRA-SANCAS</option>
+                            <option value="MEL-WILLIA">MEL-WILLIA</option>
+                            <option value="MIGUE-GAR">MIGUE-GAR</option>
+                            <option value="MILDRED-MARIN">MILDRED-MARIN</option>
+                            <option value="MONICA-CALGAR">MONICA-CALGAR</option>
+                            <option value="MONICA-GUZCRU">MONICA-GUZCRU</option>
+                            <option value="MYRALE-VASMAR">MYRALE-VASMAR</option>
+                            <option value="NATALIA-CRUMON">NATALIA-CRUMON</option>
+                            <option value="NAYIBY-LOPQUI">NAYIBY-LOPQUI</option>
+                            <option value="NELSON-MIR">NELSON-MIR</option>
+                            <option value="NELSON-ORTCAS">NELSON-ORTCAS</option>
+                            <option value="NICOL-BUIVAS">NICOL-BUIVAS</option>
+                            <option value="NINI-LOP">NINI-LOP</option>
+                            <option value="NORBER-NOR">NORBER-NOR</option>
+                            <option value="NORMA-GRASAL">NORMA-GRASAL</option>
+                            <option value="OBANDO-HEM">OBANDO-HEM</option>
+                            <option value="OF-ARGELIA">OF-ARGELIA</option>
+                            <option value="OF-CORDOBA">OF-CORDOBA</option>
+                            <option value="OFI-BUGA">OFI-BUGA</option>
+                            <option value="OF-PACORA">OF-PACORA</option>
+                            <option value="OF-SANJOSE">OF-SANJOSE</option>
+                            <option value="OMAR-SC">OMAR-SC</option>
+                            <option value="OSCAR-DURGON">OSCAR-DURGON</option>
+                            <option value="OSCAR-MAR">OSCAR-MAR</option>
+                            <option value="OSWALDO-MO">OSWALDO-MO</option>
+                            <option value="PABLO-SAN">PABLO-SAN</option>
+                            <option value="PAL-EDISON">PAL-EDISON</option>
+                            <option value="PAULA-RODGAR">PAULA-RODGAR</option>
+                            <option value="QCARLOS-DU">QCARLOS-DU</option>
+                            <option value="QUIMB-MUR">QUIMB-MUR</option>
+                            <option value="QUIN-JORGE">QUIN-JORGE</option>
+                            <option value="RICARDO-NA">RICARDO-NA</option>
+                            <option value="RIOF-JOSEP">RIOF-JOSEP</option>
+                            <option value="RIS-ALEX">RIS-ALEX</option>
+                            <option value="ROBIN-FACA">ROBIN-FACA</option>
+                            <option value="RO-GUSTAVO">RO-GUSTAVO</option>
+                            <option value="ROSEMBERG-SEPBAR">ROSEMBERG-SEPBAR</option>
+                            <option value="ROVIRA-TOL">ROVIRA-TOL</option>
+                            <option value="RUBEN-DURGON">RUBEN-DURGON</option>
+                            <option value="RUSS-PINSAN">RUSS-PINSAN</option>
+                            <option value="SANDRA-DELMIL">SANDRA-DELMIL</option>
+                            <option value="SANDRA-LEABAY">SANDRA-LEABAY</option>
+                            <option value="SANDRA-LEOSAL">SANDRA-LEOSAL</option>
+                            <option value="SANDRA-PATHOR">SANDRA-PATHOR</option>
+                            <option value="SAN-EDISON">SAN-EDISON</option>
+                            <option value="SANLORENZO">SANLORENZO</option>
+                            <option value="SAN-MATEO">SAN-MATEO</option>
+                            <option value="SARA-PIERAV">SARA-PIERAV</option>
+                            <option value="SEBASTIAN-BRICOR">SEBASTIAN-BRICOR</option>
+                            <option value="SEBASTIAN-CASARA">SEBASTIAN-CASARA</option>
+                            <option value="SE-EDILSON">SE-EDILSON</option>
+                            <option value="SERGIO-GARCHA">SERGIO-GARCHA</option>
+                            <option value="STA-CRUZ">STA-CRUZ</option>
+                            <option value="STHEFANY-VESMOR">STHEFANY-VESMOR</option>
+                            <option value="STIVEN-PARMED">STIVEN-PARMED</option>
+                            <option value="SUPIA-JUAN">SUPIA-JUAN</option>
+                            <option value="TAM-MATEO">TAM-MATEO</option>
+                            <option value="TATIANA-GONTAM">TATIANA-GONTAM</option>
+                            <option value="TCRISTO-RA">TCRISTO-RA</option>
+                            <option value="TEB-JUAND">TEB-JUAND</option>
+                            <option value="UBEIMAR-AL">UBEIMAR-AL</option>
+                            <option value="ULLOA-MUR">ULLOA-MUR</option>
+                            <option value="VALENTINA-RESVAS">VALENTINA-RESVAS</option>
+                            <option value="VAL-MATEO">VAL-MATEO</option>
+                            <option value="VANESSA-TAPMON">VANESSA-TAPMON</option>
+                            <option value="VENAD-JHON">VENAD-JHON</option>
+                            <option value="VERONICA-MORSAN">VERONICA-MORSAN</option>
+                            <option value="VERSALLES">VERSALLES</option>
+                            <option value="VICTOR-RAM">VICTOR-RAM</option>
+                            <option value="VITER-JOSE">VITER-JOSE</option>
+                            <option value="VLADIMIR-G">VLADIMIR-G</option>
+                            <option value="WENDY-IDAPIE">WENDY-IDAPIE</option>
+                            <option value="WILLIAM-GR">WILLIAM-GR</option>
+                            <option value="WILLIAMS-R">WILLIAMS-R</option>
+                            <option value="WILLI-GRA">WILLI-GRA</option>
+                            <option value="WILLI-PALM">WILLI-PALM</option>
+                            <option value="WILSON-FRA">WILSON-FRA</option>
+                            <option value="WLEYDY-GONGON">WLEYDY-GONGON</option>
+                            <option value="YAMILETH-CORURI">YAMILETH-CORURI</option>
+                            <option value="YAMILETH-RODRAM">YAMILETH-RODRAM</option>
+                            <option value="YEIFER-FERMAP">YEIFER-FERMAP</option>
+                            <option value="YEIMI-LOZROD">YEIMI-LOZROD</option>
+                            <option value="YEISON-ANS">YEISON-ANS</option>
+                            <option value="YEISON-BEL">YEISON-BEL</option>
+                            <option value="YEISON-GON">YEISON-GON</option>
+                            <option value="YEISON-GU">YEISON-GU</option>
+                            <option value="YENNY-VALCAS">YENNY-VALCAS</option>
+                            <option value="YENNY-VASGUT">YENNY-VASGUT</option>
+                            <option value="YERALDINE-MARPIN">YERALDINE-MARPIN</option>
+                            <option value="YESENIA-JARAGU">YESENIA-JARAGU</option>
+                            <option value="YISSEL-TABESC">YISSEL-TABESC</option>
+                            <option value="YOLANDA-CORHOY">YOLANDA-CORHOY</option>
+                            <option value="YOLEIDIS-PINURI">YOLEIDIS-PINURI</option>
+                            <option value="YORLEN-VILMAT">YORLEN-VILMAT</option>
+                            <option value="YURLEY-SERLEO">YURLEY-SERLEO</option>
+                        </datalist>
                         <div class="error-message" id="error-pisco">Este campo es obligatorio</div>
                     </div>
 
                     <div class="form-group">
-                        <label for="dondePago" class="required">Dónde pagó</label>
+                        <label for="dondePago" class="required">DÃ³nde pagÃ³</label>
                         <select id="dondePago" name="dondePago" required>
-                            <option value="">Selecciona una opción</option>
-                            <option value="Nequi">Nequi (3235216832 Doña Adriana)</option>
+                            <option value="">Selecciona una opciÃ³n</option>
+                            <option value="Nequi">Nequi (3235216832 DoÃ±a Adriana)</option>
                             <option value="Bancolombia">Bancolombia (72133789471)</option>
                             <option value="Bancolombia Corresponsal">Bancolombia Corresponsal (Convenio 56566)</option>
                             <option value="Davivienda">Davivienda (127669999972)</option>
                             <option value="Llave Davivienda">Llave Davivienda (@9003407247)</option>
                             <option value="Efecty">Efecty (Convenio 111489)</option>
                         </select>
-                        <div class="error-message" id="error-dondePago">Selecciona dónde pagó el cliente</div>
+                        <div class="error-message" id="error-dondePago">Selecciona dÃ³nde pagÃ³ el cliente</div>
                     </div>
 
 
-                    <button type="submit" class="btn btn-primary">Continuar a adjuntar comprobante →</button>
+                    <button type="submit" class="btn btn-primary">Continuar a adjuntar comprobante â†’</button>
                 </form>
             </div>
 
@@ -500,28 +861,28 @@
                     <div class="nequi-number" id="payment-account" style="font-size: 24px; letter-spacing: 2px;">---</div>
                 </div>
                 <div class="alert">
-                    <span class="alert-icon">⚠️</span>
+                    <span class="alert-icon">âš ï¸</span>
                     <span class="alert-text">
-                        <strong>¡IMPORTANTE!</strong> Asegúrate de adjuntar el comprobante correcto. El sistema leerá automáticamente el monto y la fecha. El sistema leerá automáticamente el monto transferido.
+                        <strong>Â¡IMPORTANTE!</strong> AsegÃºrate de adjuntar el comprobante correcto. El sistema leerÃ¡ automÃ¡ticamente el monto y la fecha. El sistema leerÃ¡ automÃ¡ticamente el monto transferido.
                     </span>
                 </div>
 
                 <div class="example-container" style="text-align: center; margin-bottom: 20px; background: white; border-radius: 12px; padding: 15px; border: 1px solid #e5e7eb;">
-                    <p style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 10px;">📸 Así debe verse tu captura:</p>
-                    <img src="ejemplo.png" alt="Ejemplo de comprobante válido" style="max-height: 250px; width: auto; border-radius: 8px; border: 2px solid #10b981;" onerror="this.style.display='none';">
-                    <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">Debe incluir el número Nequi destino <strong>323 251 6832</strong> y ser legible.</p>
+                    <p style="font-size: 14px; font-weight: 600; color: #374151; margin-bottom: 10px;">ðŸ“¸ AsÃ­ debe verse tu captura:</p>
+                    <img src="ejemplo.png" alt="Ejemplo de comprobante vÃ¡lido" style="max-height: 250px; width: auto; border-radius: 8px; border: 2px solid #10b981;" onerror="this.style.display='none';">
+                    <p style="font-size: 12px; color: #6b7280; margin-top: 8px;">Debe incluir el nÃºmero Nequi destino <strong>323 251 6832</strong> y ser legible.</p>
                 </div>
 
                 <div class="file-upload-zone" id="upload-zone">
                     <input type="file" id="file-input" accept="image/*,.pdf" required>
-                    <div class="upload-icon">📸</div>
-                    <div class="upload-text">Arrastra o toca aquí para adjuntar comprobante</div>
-                    <div class="upload-subtext">Formatos: JPG, PNG o PDF (máx. 5MB)</div>
+                    <div class="upload-icon">ðŸ“¸</div>
+                    <div class="upload-text">Arrastra o toca aquÃ­ para adjuntar comprobante</div>
+                    <div class="upload-subtext">Formatos: JPG, PNG o PDF (mÃ¡x. 5MB)</div>
                     <div class="file-name" id="file-name"></div>
                 </div>
 
                 <button type="button" class="btn btn-primary" id="btn-submit" disabled>
-                    Enviar comprobante ✓
+                    Enviar comprobante âœ“
                 </button>
 
                 <div class="loader" id="loader">
@@ -530,15 +891,15 @@
                 </div>
             </div>
 
-            <!-- PASO 3: CONFIRMACIÓN -->
+            <!-- PASO 3: CONFIRMACIÃ“N -->
             <div class="step" id="step-3">
                 <div class="success-message">
-                    <div class="success-icon">✓</div>
-                    <h2>¡Pago reportado con éxito!</h2>
+                    <div class="success-icon">âœ“</div>
+                    <h2>Â¡Pago reportado con Ã©xito!</h2>
                     <p>Hemos recibido y registrado tu comprobante de pago correctamente.</p>
-                    <p><strong>Nuestro equipo de Cartera verificará tu pago en las próximas 24-48 horas.</strong></p>
+                    <p><strong>Nuestro equipo de Cartera verificarÃ¡ tu pago en las prÃ³ximas 24-48 horas.</strong></p>
                     <p style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #e5e7eb; font-size: 14px;">
-                        Si tienes alguna duda sobre tu pago, contacta a nuestro equipo de atención al cliente.
+                        Si tienes alguna duda sobre tu pago, contacta a nuestro equipo de atenciÃ³n al cliente.
                     </p>
                 </div>
             </div>
@@ -546,11 +907,11 @@
     </div>
 
     <script>
-        // ===== CONFIGURACIÓN =====
-        // 🔧 IMPORTANTE: Reemplaza esta URL con la URL de tu Web App de Google Apps Script
+        // ===== CONFIGURACIÃ“N =====
+        // ðŸ”§ IMPORTANTE: Reemplaza esta URL con la URL de tu Web App de Google Apps Script
         const GOOGLE_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwOLsZZ6s9tHfU7Zlw2hj1X1NncfItXvYVB4eNaox_ypPthsllQpE5rKD4tDtUG6kuUiw/exec';
         
-        // ===== ESTADO DE LA APLICACIÓN =====
+        // ===== ESTADO DE LA APLICACIÃ“N =====
         let currentStep = 1;
         let formData = {};
         let uploadedFile = null;
@@ -605,9 +966,9 @@
         function generateQRCode() {
             const qrContainer = document.getElementById('qr-container');
             const nequiNumber = '3232516832';
-            // Usando API gratuita de generación de QR
+            // Usando API gratuita de generaciÃ³n de QR
             const qrURL = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=Nequi:${nequiNumber}`;
-            qrContainer.innerHTML = `<img src="${qrURL}" alt="Código QR Nequi ${nequiNumber}">`;
+            qrContainer.innerHTML = `<img src="${qrURL}" alt="CÃ³digo QR Nequi ${nequiNumber}">`;
         }
 
         function formatFileSize(bytes) {
@@ -627,7 +988,7 @@
             });
         }
 
-        // ===== PASO 1: VALIDACIÓN Y ENVÍO DEL FORMULARIO =====
+        // ===== PASO 1: VALIDACIÃ“N Y ENVÃO DEL FORMULARIO =====
         formStep1.addEventListener('submit', async (e) => {
             e.preventDefault();
 
@@ -703,10 +1064,10 @@
                 return;
             }
 
-            // Validar tamaño (máx 5MB)
+            // Validar tamaÃ±o (mÃ¡x 5MB)
             const maxSize = 5 * 1024 * 1024; // 5MB en bytes
             if (file.size > maxSize) {
-                alert('❌ El archivo es demasiado grande. El tamaño máximo permitido es 5MB.');
+                alert('âŒ El archivo es demasiado grande. El tamaÃ±o mÃ¡ximo permitido es 5MB.');
                 fileInput.value = '';
                 return;
             }
@@ -714,32 +1075,32 @@
             // Validar tipo
             const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'application/pdf'];
             if (!validTypes.includes(file.type)) {
-                alert('❌ Formato no válido. Por favor sube una imagen JPG, PNG o un archivo PDF.');
+                alert('âŒ Formato no vÃ¡lido. Por favor sube una imagen JPG, PNG o un archivo PDF.');
                 fileInput.value = '';
                 return;
             }
 
-            // Archivo válido
+            // Archivo vÃ¡lido
             uploadedFile = file;
             uploadZone.classList.add('has-file');
-            fileName.textContent = `✓ ${file.name} (${formatFileSize(file.size)})`;
+            fileName.textContent = `âœ“ ${file.name} (${formatFileSize(file.size)})`;
             btnSubmit.disabled = false;
         });
 
-        // ===== PASO 2: ENVÍO FINAL DEL COMPROBANTE =====
+        // ===== PASO 2: ENVÃO FINAL DEL COMPROBANTE =====
         btnSubmit.addEventListener('click', async () => {
             if (!uploadedFile) {
-                alert('⚠️ Por favor adjunta tu comprobante de pago antes de continuar.');
+                alert('âš ï¸ Por favor adjunta tu comprobante de pago antes de continuar.');
                 return;
             }
 
             // Validar URL de Google Apps Script
             if (GOOGLE_SCRIPT_URL === 'TU_URL_DE_GOOGLE_APPS_SCRIPT_AQUI') {
-                alert('⚠️ Error de configuración: La URL del Google Apps Script no ha sido configurada. Por favor contacta al administrador.');
+                alert('âš ï¸ Error de configuraciÃ³n: La URL del Google Apps Script no ha sido configurada. Por favor contacta al administrador.');
                 return;
             }
 
-            // Deshabilitar botón y mostrar loader
+            // Deshabilitar botÃ³n y mostrar loader
             btnSubmit.disabled = true;
             loader.classList.add('show');
 
@@ -762,7 +1123,7 @@
                     timestamp: new Date().toISOString()
                 };
 
-                // Enviar a Google Apps Script usando POST estándar (text/plain para evitar preflight)
+                // Enviar a Google Apps Script usando POST estÃ¡ndar (text/plain para evitar preflight)
                 const response = await fetch(GOOGLE_SCRIPT_URL, {
                     method: 'POST',
                     headers: {
@@ -779,14 +1140,14 @@
                 } catch (e) {
                     console.error("Respuesta HTML de Apps Script:", textResponse);
                     
-                    if (textResponse.includes("Authorization is required") || textResponse.includes("autorización")) {
-                        throw new Error("Error: El script requiere autorización. Asegúrate de configurar 'Quién tiene acceso' a 'Cualquier persona' al implementar.");
+                    if (textResponse.includes("Authorization is required") || textResponse.includes("autorizaciÃ³n")) {
+                        throw new Error("Error: El script requiere autorizaciÃ³n. AsegÃºrate de configurar 'QuiÃ©n tiene acceso' a 'Cualquier persona' al implementar.");
                     }
                     if (textResponse.includes("Script function not found") || textResponse.includes("TypeError")) {
-                        throw new Error("Error interno en el script. Por favor, asegúrate de haber creado una 'Nueva versión' en Administrar implementaciones.");
+                        throw new Error("Error interno en el script. Por favor, asegÃºrate de haber creado una 'Nueva versiÃ³n' en Administrar implementaciones.");
                     }
                     
-                    throw new Error("El servidor devolvió un error inesperado. (¿Olvidaste publicar una Nueva Versión en Apps Script?).");
+                    throw new Error("El servidor devolviÃ³ un error inesperado. (Â¿Olvidaste publicar una Nueva VersiÃ³n en Apps Script?).");
                 }
 
                 if (result.success) {
@@ -801,11 +1162,11 @@
                 loader.classList.remove('show');
                 btnSubmit.disabled = false;
                 
-                alert('❌ ' + (error.message || 'Hubo un error al enviar tu comprobante. Por favor, verifica tu conexión e intenta nuevamente.'));
+                alert('âŒ ' + (error.message || 'Hubo un error al enviar tu comprobante. Por favor, verifica tu conexiÃ³n e intenta nuevamente.'));
             }
         });
 
-        // ===== VALIDACIÓN EN TIEMPO REAL =====
+        // ===== VALIDACIÃ“N EN TIEMPO REAL =====
         document.getElementById('nombre').addEventListener('blur', () => {
             validateField('nombre', 'error-nombre', (val) => val.trim().length > 0);
         });
@@ -820,15 +1181,18 @@
         document.getElementById('contrato').addEventListener('blur', () => {
             validateField('contrato', 'error-contrato', (val) => val.trim().length > 0);
         });
-        document.getElementById('pisco').addEventListener('blur', () => {
+        document.getElementById('pisco').addEventListener('input', () => {
             validateField('pisco', 'error-pisco', (val) => val.trim().length > 0);
         });
         document.getElementById('dondePago').addEventListener('change', () => {
             validateField('dondePago', 'error-dondePago', (val) => val.trim().length > 0);
         });
 
-        // ===== INICIALIZACIÓN =====
+        // ===== INICIALIZACIÃ“N =====
         updateProgress(1);
     </script>
 </body>
 </html>
+
+
+
