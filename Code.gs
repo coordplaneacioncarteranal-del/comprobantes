@@ -401,3 +401,68 @@ function guardarEnSheets(registro) {
     throw new Error('Error al guardar en Sheets: ' + error.toString());
   }
 }
+/**
+ * Crea un menú personalizado en Google Sheets al abrir el documento.
+ */
+function onOpen() {
+  const ui = SpreadsheetApp.getUi();
+  ui.createMenu('Actualizar Datos')
+      .addItem('Actualizar Ubicación de Comprobantes', 'actualizarUbicaciones')
+      .addToUi();
+}
+
+/**
+ * Revisa todos los enlaces de comprobantes y actualiza la columna 12 (Ubicación Comprobante)
+ * con el nombre de la carpeta actual donde se encuentra el archivo en Drive.
+ */
+function actualizarUbicaciones() {
+  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const lastRow = sheet.getLastRow();
+  
+  if (lastRow <= 1) {
+    SpreadsheetApp.getUi().alert('Aviso', 'No hay datos para actualizar.', SpreadsheetApp.getUi().ButtonSet.OK);
+    return;
+  }
+  
+  // Mostrar mensaje de inicio (opcional, pero útil)
+  SpreadsheetApp.getActiveSpreadsheet().toast('Buscando ubicaciones...', 'Actualizando', 3);
+  
+  // Columna 6 = Link, Columna 12 = Ubicación
+  const dataRange = sheet.getRange(2, 6, lastRow - 1, 7); 
+  const data = dataRange.getValues();
+  
+  let actualizados = 0;
+  let conErrores = 0;
+  
+  for (let i = 0; i < data.length; i++) {
+    const link = data[i][0]; // Columna 6 (índice 0)
+    if (link && link.toString().includes('drive.google.com/file/d/')) {
+      const match = link.toString().match(/d\/([a-zA-Z0-9_-]+)/);
+      if (match && match[1]) {
+        const fileId = match[1];
+        try {
+          const file = DriveApp.getFileById(fileId);
+          const parents = file.getParents();
+          if (parents.hasNext()) {
+            const folderName = parents.next().getName();
+            // Columna 12 (índice 6)
+            if (data[i][6] !== folderName) {
+              data[i][6] = folderName;
+              actualizados++;
+            }
+          }
+        } catch (e) {
+          conErrores++;
+        }
+      }
+    }
+  }
+  
+  if (actualizados > 0) {
+    const nuevasUbicaciones = data.map(row => [row[6]]);
+    sheet.getRange(2, 12, lastRow - 1, 1).setValues(nuevasUbicaciones);
+    SpreadsheetApp.getUi().alert('Éxito', "Se han actualizado " + actualizados + " ubicaciones de comprobantes correctamente.\n(Errores/No encontrados: " + conErrores + ")", SpreadsheetApp.getUi().ButtonSet.OK);
+  } else {
+    SpreadsheetApp.getUi().alert('Finalizado', "Todas las ubicaciones ya estaban al día.\n(Errores/No encontrados: " + conErrores + ")", SpreadsheetApp.getUi().ButtonSet.OK);
+  }
+}
