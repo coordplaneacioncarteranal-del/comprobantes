@@ -89,6 +89,7 @@ function doPost(e) {
         dondePago: data.dondePago,
       contacto: data.contacto,
       archivoUrl: archivoDrive.url,
+      carpetaDrive: archivoDrive.folderName,
       timestamp: data.timestamp
     });
     
@@ -295,7 +296,7 @@ function guardarArchivoEnDrive(base64Data, nombreArchivo, tipoArchivo, cedula, d
     archivo.setName(nuevoNombre);
     archivo.setSharing(DriveApp.Access.ANYONE_WITH_LINK, DriveApp.Permission.VIEW);
     
-    return { url: archivo.getUrl(), id: archivo.getId() };
+    return { url: archivo.getUrl(), id: archivo.getId(), folderName: folder.getName() };
   } catch (error) {
     Logger.log('Error al guardar archivo en Drive: ' + error.toString());
     throw new Error('Error al guardar el comprobante en Drive: ' + error.toString());
@@ -312,25 +313,26 @@ function guardarEnSheets(registro) {
     
     // Asegurar que existan suficientes columnas físicas en la hoja
     const maxCols = sheet.getMaxColumns();
-    if (maxCols < 11) {
-      sheet.insertColumnsAfter(maxCols, 11 - maxCols);
+    if (maxCols < 12) {
+      sheet.insertColumnsAfter(maxCols, 12 - maxCols);
     }
 
-    // Asegurar que existan las columnas hasta la 11
+    // Asegurar que existan las columnas hasta la 12
     const lastCol = sheet.getLastColumn();
     if (lastCol < 8) sheet.getRange(1, 8).setValue('Fecha del comprobante').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
     if (lastCol < 9) sheet.getRange(1, 9).setValue('Dónde pagó').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
     if (lastCol < 10) sheet.getRange(1, 10).setValue('Usuario de pisco').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
     if (lastCol < 11) sheet.getRange(1, 11).setValue('Número de Contrato').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
+    if (lastCol < 12) sheet.getRange(1, 12).setValue('Ubicación Comprobante').setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
     
     // Si es la primera vez, agregar encabezados iniciales
     if (sheet.getLastRow() === 0) {
       sheet.appendRow([
           'Timestamp', 'Nombre completo', 'Cédula', 'Servicio/Producto', 
           'Valor pagado', 'Link del comprobante', 'Estado de conciliación', 'Fecha del comprobante',
-          'Dónde pagó', 'Usuario de pisco', 'Número de Contrato'
+          'Dónde pagó', 'Usuario de pisco', 'Número de Contrato', 'Ubicación Comprobante'
         ]);
-      sheet.getRange(1, 1, 1, 11).setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
+      sheet.getRange(1, 1, 1, 12).setFontWeight('bold').setBackground('#f093fb').setFontColor('#ffffff');
       sheet.setFrozenRows(1);
     }
     
@@ -351,7 +353,8 @@ function guardarEnSheets(registro) {
       registro.fecha || 'No detectada',
       registro.dondePago || '',
       registro.pisco || '',
-      registro.contrato || ''
+      registro.contrato || '',
+      registro.carpetaDrive || ''
     ];
 
     // Buscar la última fila real basándonos en la columna A (Timestamp)
@@ -369,7 +372,7 @@ function guardarEnSheets(registro) {
     
     // Estilos alternos de fila
     if (lastRow % 2 === 0) {
-      sheet.getRange(lastRow, 1, 1, 11).setBackground('#f9fafb');
+      sheet.getRange(lastRow, 1, 1, rowData.length).setBackground('#f9fafb');
     }
     
     // Formato de Celda de Valor
