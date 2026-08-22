@@ -416,16 +416,20 @@ function onOpen() {
  * con el nombre de la carpeta actual donde se encuentra el archivo en Drive.
  */
 function actualizarUbicaciones() {
-  const sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+  const sheet = spreadsheet.getActiveSheet();
   const lastRow = sheet.getLastRow();
   
   if (lastRow <= 1) {
-    SpreadsheetApp.getUi().alert('Aviso', 'No hay datos para actualizar.', SpreadsheetApp.getUi().ButtonSet.OK);
+    // If not bounded to UI, alert won't work, we'll just log
+    Logger.log('Aviso: No hay datos para actualizar.');
     return;
   }
   
-  // Mostrar mensaje de inicio (opcional, pero útil)
-  SpreadsheetApp.getActiveSpreadsheet().toast('Buscando ubicaciones...', 'Actualizando', 3);
+  // Mostrar mensaje de inicio (opcional, pero útil si está bindeado, si no, fallaría, así que lo removemos o lo envolvemos)
+  try {
+    spreadsheet.toast('Buscando ubicaciones...', 'Actualizando', 3);
+  } catch(e) {}
   
   // Columna 6 = Link, Columna 12 = Ubicación
   const dataRange = sheet.getRange(2, 6, lastRow - 1, 7); 
@@ -461,8 +465,8 @@ function actualizarUbicaciones() {
   if (actualizados > 0) {
     const nuevasUbicaciones = data.map(row => [row[6]]);
     sheet.getRange(2, 12, lastRow - 1, 1).setValues(nuevasUbicaciones);
-    SpreadsheetApp.getUi().alert('Éxito', "Se han actualizado " + actualizados + " ubicaciones de comprobantes correctamente.\n(Errores/No encontrados: " + conErrores + ")", SpreadsheetApp.getUi().ButtonSet.OK);
+    Logger.log("ÉXITO: Se han actualizado " + actualizados + " ubicaciones de comprobantes correctamente. (Errores/No encontrados: " + conErrores + ")");
   } else {
-    SpreadsheetApp.getUi().alert('Finalizado', "Todas las ubicaciones ya estaban al día.\n(Errores/No encontrados: " + conErrores + ")", SpreadsheetApp.getUi().ButtonSet.OK);
+    Logger.log("FINALIZADO: Todas las ubicaciones ya estaban al día. (Errores/No encontrados: " + conErrores + ")");
   }
 }
