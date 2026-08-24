@@ -46,6 +46,13 @@ function doPost(e) {
   try {
     const data = JSON.parse(e.postData.contents);
     
+    if (data.action === 'checkCedula') {
+      const records = buscarPagosPorCedula(data.cedula);
+      return ContentService
+        .createTextOutput(JSON.stringify({ success: true, records: records }))
+        .setMimeType(ContentService.MimeType.JSON);
+    }
+    
     if (!data.nombre || !data.cedula || !data.servicio || !data.contrato || !data.pisco || !data.dondePago || !data.archivo || !data.nombreArchivo) {
       return ContentService
         .createTextOutput(JSON.stringify({ 
@@ -468,5 +475,33 @@ function actualizarUbicaciones() {
     Logger.log("Ã‰XITO: Se han actualizado " + actualizados + " ubicaciones de comprobantes correctamente. (Errores/No encontrados: " + conErrores + ")");
   } else {
     Logger.log("FINALIZADO: Todas las ubicaciones ya estaban al dÃ­a. (Errores/No encontrados: " + conErrores + ")");
+  }
+}
+
+/**
+ * Busca pagos previos por cédula
+ */
+function buscarPagosPorCedula(cedula) {
+  try {
+    const spreadsheet = SpreadsheetApp.openById(SPREADSHEET_ID);
+    const sheet = spreadsheet.getActiveSheet();
+    const data = sheet.getDataRange().getValues();
+    
+    const records = [];
+    // Omitir encabezados (i=1)
+    for (let i = 1; i < data.length; i++) {
+      const row = data[i];
+      // La cédula está en la columna 3 (índice 2)
+      if (row[2] && String(row[2]).trim() === String(cedula).trim()) {
+        records.push({
+          fecha: row[7], // Fecha del comprobante (columna 8)
+          valor: row[4]  // Valor pagado (columna 5)
+        });
+      }
+    }
+    return records;
+  } catch (error) {
+    Logger.log('Error buscando pagos: ' + error.toString());
+    return [];
   }
 }

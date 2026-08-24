@@ -445,6 +445,11 @@
                         <label for="cedula" class="required">Número de cédula del cliente</label>
                         <input type="text" id="cedula" name="cedula" required placeholder="Solo números" pattern="[0-9]+">
                         <div class="error-message" id="error-cedula">Ingresa solo números</div>
+                        <div id="alert-pagos-cedula" class="alert" style="display: none; margin-top: 10px; background-color: #fef2f2; border-left-color: #ef4444; padding: 10px;">
+                            <span class="alert-icon">⚠️</span>
+                            <span class="alert-text"><strong>ESTA CEDULA YA TIENE CARGADO LOS SIGUIENTES PAGOS:</strong></span>
+                            <ul id="lista-pagos-cedula" style="margin-top: 8px; margin-left: 20px; font-size: 13px; color: #b91c1c;"></ul>
+                        </div>
                     </div>
 
                     <div class="form-group">
@@ -1171,8 +1176,39 @@
             validateField('nombre', 'error-nombre', (val) => val.trim().length > 0);
         });
 
-        document.getElementById('cedula').addEventListener('blur', () => {
-            validateField('cedula', 'error-cedula', (val) => /^[0-9]+$/.test(val.trim()));
+        document.getElementById('cedula').addEventListener('blur', async () => {
+            const isValid = validateField('cedula', 'error-cedula', (val) => /^[0-9]+$/.test(val.trim()));
+            const cedulaVal = document.getElementById('cedula').value.trim();
+            const alertBox = document.getElementById('alert-pagos-cedula');
+            const listaPagos = document.getElementById('lista-pagos-cedula');
+            
+            if (isValid && cedulaVal) {
+                try {
+                    const response = await fetch(GOOGLE_SCRIPT_URL, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'text/plain;charset=utf-8' },
+                        body: JSON.stringify({ action: 'checkCedula', cedula: cedulaVal })
+                    });
+                    const result = await response.json();
+                    
+                    if (result.success && result.records && result.records.length > 0) {
+                        listaPagos.innerHTML = '';
+                        result.records.forEach(record => {
+                            const li = document.createElement('li');
+                            li.textContent = `Fecha: ${record.fecha || 'N/A'} - Valor: ${record.valor || 'N/A'}`;
+                            listaPagos.appendChild(li);
+                        });
+                        alertBox.style.display = 'block';
+                    } else {
+                        alertBox.style.display = 'none';
+                    }
+                } catch (error) {
+                    console.error("Error consultando pagos:", error);
+                    alertBox.style.display = 'none';
+                }
+            } else {
+                if (alertBox) alertBox.style.display = 'none';
+            }
         });
 
         document.getElementById('servicio').addEventListener('change', () => {
