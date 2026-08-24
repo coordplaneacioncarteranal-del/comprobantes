@@ -446,8 +446,8 @@
                         <input type="text" id="cedula" name="cedula" required placeholder="Solo números" pattern="[0-9]+">
                         <div class="error-message" id="error-cedula">Ingresa solo números</div>
                         <div id="alert-pagos-cedula" class="alert" style="display: none; margin-top: 10px; background-color: #fef2f2; border-left-color: #ef4444; padding: 10px;">
-                            <span class="alert-icon">⚠️</span>
-                            <span class="alert-text"><strong>ESTA CEDULA YA TIENE CARGADO LOS SIGUIENTES PAGOS:</strong></span>
+                            <span class="alert-icon" id="alert-icon-cedula">⚠️</span>
+                            <span class="alert-text"><strong id="alert-title-cedula">ESTA CEDULA YA TIENE CARGADO LOS SIGUIENTES PAGOS:</strong></span>
                             <ul id="lista-pagos-cedula" style="margin-top: 8px; margin-left: 20px; font-size: 13px; color: #b91c1c;"></ul>
                         </div>
                     </div>
@@ -1180,9 +1180,20 @@
             const isValid = validateField('cedula', 'error-cedula', (val) => /^[0-9]+$/.test(val.trim()));
             const cedulaVal = document.getElementById('cedula').value.trim();
             const alertBox = document.getElementById('alert-pagos-cedula');
+            const alertIcon = document.getElementById('alert-icon-cedula');
+            const alertTitle = document.getElementById('alert-title-cedula');
             const listaPagos = document.getElementById('lista-pagos-cedula');
             
             if (isValid && cedulaVal) {
+                // Mostrar estado de carga
+                alertBox.style.display = 'block';
+                alertBox.style.backgroundColor = '#eff6ff';
+                alertBox.style.borderLeftColor = '#3b82f6';
+                alertIcon.textContent = '⏳';
+                alertTitle.textContent = 'Buscando si esta cédula tiene pagos previos...';
+                alertTitle.style.color = '#1e40af';
+                listaPagos.innerHTML = '';
+
                 try {
                     const response = await fetch(GOOGLE_SCRIPT_URL, {
                         method: 'POST',
@@ -1192,13 +1203,17 @@
                     const result = await response.json();
                     
                     if (result.success && result.records && result.records.length > 0) {
-                        listaPagos.innerHTML = '';
+                        alertBox.style.backgroundColor = '#fef2f2';
+                        alertBox.style.borderLeftColor = '#ef4444';
+                        alertIcon.textContent = '⚠️';
+                        alertTitle.textContent = 'ESTA CEDULA YA TIENE CARGADO LOS SIGUIENTES PAGOS:';
+                        alertTitle.style.color = '#b91c1c';
+                        
                         result.records.forEach(record => {
                             const li = document.createElement('li');
                             li.textContent = `Fecha: ${record.fecha || 'N/A'} - Valor: ${record.valor || 'N/A'}`;
                             listaPagos.appendChild(li);
                         });
-                        alertBox.style.display = 'block';
                     } else {
                         alertBox.style.display = 'none';
                     }
